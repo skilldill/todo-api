@@ -8,8 +8,8 @@ services:
       - "4000:4000"
     depends_on:
       - mongo
-    volumes:
-      - .:/app
+    networks:
+      - todosnet
 
   mongo:
     image: mongo:latest
@@ -21,9 +21,8 @@ services:
       - mongo_data:/data/db
     environment:
       MONGO_INITDB_DATABASE: todosdb
-
-volumes:
-  mongo_data:
+    networks:
+      - todosnet
 
 networks:
-  todoapinet:
+  todosnet:
