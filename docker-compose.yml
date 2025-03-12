@@ -9,7 +9,7 @@ services:
     depends_on:
       - mongo
     networks:
-      - mathbattlenet
+      - todosnet
 
   proxy:
     image: nginx:latest
@@ -22,7 +22,7 @@ services:
     depends_on:
       - client
     networks:
-      - todoapinet
+      - todosnet
 
   mongo:
     image: mongo:latest
@@ -35,7 +35,7 @@ services:
     environment:
       MONGO_INITDB_DATABASE: todosdb
     networks:
-      - mathbattlenet
+      - todosnet
 
 networks:
-  todoapinet:
+  todosnet:
