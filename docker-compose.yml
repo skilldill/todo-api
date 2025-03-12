@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  api:
+    build: .
+    container_name: api_todos
+    ports:
+      - "4000:4000"
+    depends_on:
+      - mongo
+    volumes:
+      - .:/app
+
+  proxy:
+    image: nginx:latest
+    ports:
+      - 80:80
+      - 443:443
+    restart: always
+    volumes:
+      - ./proxy_conf/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - client
+    networks:
+      - todoapinet
+
+  mongo:
+    image: mongo:latest
+    container_name: mongo_db
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    environment:
+      MONGO_INITDB_DATABASE: todosdb
+
+volumes:
+  mongo_data:
+
+networks:
+  todoapinet:
