@@ -37,3 +37,6 @@ services:
 
 networks:
   todosnet:
+
+volumes:
+  mongo_data:
