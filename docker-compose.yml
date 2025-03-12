@@ -8,8 +8,8 @@ services:
       - "4000:4000"
     depends_on:
       - mongo
-    volumes:
-      - .:/app
+    networks:
+      - mathbattlenet
 
   proxy:
     image: nginx:latest
@@ -34,9 +34,8 @@ services:
       - mongo_data:/data/db
     environment:
       MONGO_INITDB_DATABASE: todosdb
-
-volumes:
-  mongo_data:
+    networks:
+      - mathbattlenet
 
 networks:
   todoapinet:
